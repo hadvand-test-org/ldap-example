@@ -5,7 +5,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/hadvand-test-org/ldap-example.git
+  url: ssh://git@github.com/hadvand-test-org/ldap-example.git
+  secretRef:
+    name: ldap-example-deploy-key
   ref:
-    branch: master
+    branch: main
   timeout: 60s
