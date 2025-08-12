@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: ldap-example
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/hadvand-test-org/ldap-example.git
+  ref:
+    branch: master
+  timeout: 60s

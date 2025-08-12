@@ -1,0 +1,36 @@
+# Flux Kustomization objects to apply the ldap-example manifests
+# Namespace flux-system must exist (created by flux install)
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ldap-example-base
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: ./ldap-example/base
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: ldap-example
+  timeout: 2m
+  wait: true
+  targetNamespace: ldap-example
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ldap-example-dev
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: ./ldap-example/overlays/dev
+  prune: true
+  dependsOn:
+    - name: ldap-example-base
+  sourceRef:
+    kind: GitRepository
+    name: ldap-example
+  timeout: 2m
+  wait: true
+  targetNamespace: ldap-example-dev
